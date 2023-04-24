@@ -10,11 +10,32 @@ const Slider = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
+  console.log(byDateDesc);
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
+      //Correction de byDateDesc.length avec le -1 pour correspondre à la base 0 de comptage.
+      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
       5000
     );
+  };
+  const monthes = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre",
+  ];
+  const getCorrectMonth = (theDate) => {
+    let date = new Date(theDate);
+    let numMois = date.getMonth();
+    return monthes[numMois];
   };
   useEffect(() => {
     nextCard();
@@ -34,7 +55,13 @@ const Slider = () => {
               <div className="SlideCard__description">
                 <h3>{event.title}</h3>
                 <p>{event.description}</p>
-                <div>{getMonth(new Date(event.date))}</div>
+
+                <div>
+                  {
+                    // modification de la fonction get month pour afficher le bon mois
+                    getCorrectMonth(event.date)
+                  }
+                </div>
               </div>
             </div>
           </div>
