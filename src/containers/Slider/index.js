@@ -10,7 +10,6 @@ const Slider = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
-  console.log(byDateDesc);
   const nextCard = () => {
     setTimeout(
       //Correction de byDateDesc.length avec le -1 pour correspondre à la base 0 de comptage.
@@ -18,21 +17,22 @@ const Slider = () => {
       5000
     );
   };
-  const monthes = [
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
+
   const getCorrectMonth = (theDate) => {
+    const monthes = [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre",
+    ];
     let date = new Date(theDate);
     let numMois = date.getMonth();
     return monthes[numMois];
@@ -69,10 +69,13 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={event.name}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={
+                    //idx remplacé par index
+                    index === radioIdx
+                  }
                 />
               ))}
             </div>
