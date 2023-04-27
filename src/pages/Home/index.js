@@ -15,9 +15,10 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   // "last" remplacé par "data", "last" ne renvoyait à rien
   const { data } = useData();
-  // utiliser map + filter pour faire ressortir le dernier évènement
-  const lastEvent = data?.events.filter(() => {}).map(() => {});
-  console.log("lastEvent is : ", lastEvent);
+  // l'utilisationde "sort" en comparant les date pour obtenir la plus récente a permis de résoudre le problème
+  const latestEvent = data?.events
+    .sort((eventA, eventB) => new Date(eventB.date) - new Date(eventA.date))
+    .shift();
   return (
     <>
       <header>
@@ -119,12 +120,9 @@ const Page = () => {
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
           <EventCard
-            imageSrc={lastEvent}
-            title={lastEvent}
-            date={lastEvent}
-            // imageSrc={last?.cover}
-            // title={last?.title}
-            // date={new Date(last?.date)}
+            imageSrc={latestEvent?.cover}
+            title={latestEvent?.title}
+            date={latestEvent?.date}
             small
             label="boom"
           />

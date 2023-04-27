@@ -11,11 +11,13 @@ const Slider = () => {
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
-    setTimeout(
-      //Correction de byDateDesc.length avec le -1 pour correspondre à la base 0 de comptage.
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      5000
-    );
+    setTimeout(() => {
+      // ajout d'une condition de vérification de la valeur de "byDateDesc" pour savoir si elle est bien définie
+      if (byDateDesc && byDateDesc.length > 0) {
+        //Correction de byDateDesc.length avec le -1 pour correspondre à la base 0 de comptage.
+        setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
+      }
+    }, 5000);
   };
 
   const getCorrectMonth = (theDate) => {
@@ -40,6 +42,7 @@ const Slider = () => {
   useEffect(() => {
     nextCard();
   });
+
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
@@ -69,7 +72,7 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={event.name}
+                  key={event.id}
                   type="radio"
                   name="radio-button"
                   checked={
