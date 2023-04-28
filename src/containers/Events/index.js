@@ -13,17 +13,19 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const filteredEvents = ((!type ? data?.events : data?.events) || []).filter(
-    (event, index) => {
-      if (
-        (currentPage - 1) * PER_PAGE <= index &&
-        PER_PAGE * currentPage > index
-      ) {
-        if (event.type === type || !type) return true;
+
+  // fonction de filtre modifiée pour utiliser la methode slice(), plus performante car la fnction n'évalue pas chaque élément mais sort un ensemble d'event correspondant au type sélectionné
+  const start = (currentPage - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+
+  const filteredEvents = ((!type ? data?.events : data?.events) || [])
+    .filter((event) => {
+      if (event.type === type || !type) {
+        return true;
       }
       return false;
-    }
-  );
+    })
+    .slice(start, end);
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);

@@ -29,7 +29,6 @@ const Page = () => {
       (eventA, eventB) => new Date(eventB.theDate) - new Date(eventA.theDate)
     )
     .shift();
-  console.log(latestEvent);
   return (
     <>
       <header>

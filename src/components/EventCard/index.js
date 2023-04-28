@@ -3,26 +3,6 @@ import { getMonth } from "../../helpers/Date";
 
 import "./style.scss";
 
-const getCorrectMonth = (theDate) => {
-  const monthes = [
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
-  let realDate = new Date(theDate);
-  let numMois = realDate.getMonth();
-  return monthes[numMois];
-};
-
 const EventCard = ({
   imageSrc,
   imageAlt,
@@ -37,14 +17,13 @@ const EventCard = ({
     className={`EventCard${small ? " EventCard--small" : ""}`}
     {...props}
   >
-    {console.log(date)}
     <div className="EventCard__imageContainer">
       <img data-testid="card-image-testid" src={imageSrc} alt={imageAlt} />
       <div className="EventCard__label">{label}</div>
     </div>
     <div className="EventCard__descriptionContainer">
       <div className="EventCard__title">{title}</div>
-      <div className="EventCard__month">{getCorrectMonth(date)}</div>
+      <div className="EventCard__month">{getMonth(new Date(date))}</div>
     </div>
   </div>
 );
