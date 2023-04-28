@@ -18,6 +18,15 @@ const Form = ({ onSuccess, onError }) => {
       // We try to call mockContactApi
       try {
         //utilisation de la fonction onSuccess car elle n'était pas utilisé, ainsi le formulaire est bien fonctionnel
+        onSuccess(await mockContactApi());
+      } catch (err) {
+        onError(err);
+        //le setSending passé en false est décalé après coup pour s'assurer que l'erreur soit bien attrappée
+      } finally {
+        setSending(false);
+      }
+    },
+    /*  
         setSending(false);
         onSuccess(await mockContactApi());
       } catch (err) {
@@ -25,6 +34,7 @@ const Form = ({ onSuccess, onError }) => {
         onError(err);
       }
     },
+    */
     [onSuccess, onError]
   );
   return (
