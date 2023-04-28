@@ -20,25 +20,6 @@ const Slider = () => {
     }, 5000);
   };
 
-  const getCorrectMonth = (theDate) => {
-    const monthes = [
-      "Janvier",
-      "Février",
-      "Mars",
-      "Avril",
-      "Mai",
-      "Juin",
-      "Juillet",
-      "Août",
-      "Septembre",
-      "Octobre",
-      "Novembre",
-      "Décembre",
-    ];
-    let date = new Date(theDate);
-    let numMois = date.getMonth();
-    return monthes[numMois];
-  };
   useEffect(() => {
     nextCard();
   });
@@ -61,8 +42,8 @@ const Slider = () => {
 
                 <div>
                   {
-                    // modification de la fonction get month pour afficher le bon mois
-                    getCorrectMonth(event.date)
+                    // modification de la fonction getMonth pour afficher le bon mois
+                    getMonth(new Date(event.date))
                   }
                 </div>
               </div>

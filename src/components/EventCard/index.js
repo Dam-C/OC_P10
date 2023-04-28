@@ -18,8 +18,8 @@ const getCorrectMonth = (theDate) => {
     "Novembre",
     "Décembre",
   ];
-  let date = new Date(theDate);
-  let numMois = date.getMonth();
+  let realDate = new Date(theDate);
+  let numMois = realDate.getMonth();
   return monthes[numMois];
 };
 
@@ -37,6 +37,7 @@ const EventCard = ({
     className={`EventCard${small ? " EventCard--small" : ""}`}
     {...props}
   >
+    {console.log(date)}
     <div className="EventCard__imageContainer">
       <img data-testid="card-image-testid" src={imageSrc} alt={imageAlt} />
       <div className="EventCard__label">{label}</div>

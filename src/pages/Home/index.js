@@ -15,10 +15,21 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   // "last" remplacé par "data", "last" ne renvoyait à rien
   const { data } = useData();
-  // l'utilisationde "sort" en comparant les date pour obtenir la plus récente a permis de résoudre le problème
+  // l'utilisation de map+sort+shift en comparant les date pour obtenir la plus récente a permis de résoudre le problème
   const latestEvent = data?.events
-    .sort((eventA, eventB) => new Date(eventB.date) - new Date(eventA.date))
+    .map((item) => {
+      return {
+        title: item.title,
+        cover: item.cover,
+        theDate: item.date,
+        type: item.type,
+      };
+    })
+    .sort(
+      (eventA, eventB) => new Date(eventB.theDate) - new Date(eventA.theDate)
+    )
     .shift();
+  console.log(latestEvent);
   return (
     <>
       <header>
@@ -122,9 +133,10 @@ const Page = () => {
           <EventCard
             imageSrc={latestEvent?.cover}
             title={latestEvent?.title}
-            date={latestEvent?.date}
+            date={latestEvent?.theDate}
             small
-            label="boom"
+            // label n'avait pas de donnée renseignée à part "boom"
+            label={latestEvent?.type}
           />
         </div>
         <div className="col contact">
