@@ -38,7 +38,7 @@ const Page = () => {
         <section className="SliderContainer">
           <Slider />
         </section>
-        <section className="ServicesContainer">
+        <section className="ServicesContainer" id="nos-services">
           <h2 className="Title">Nos services</h2>
           <p>Nous organisons des événements sur mesure partout dans le monde</p>
           <div className="ListContainer">
@@ -67,11 +67,11 @@ const Page = () => {
             </ServiceCard>
           </div>
         </section>
-        <section className="EventsContainer">
+        <section className="EventsContainer" id="nos-realisations">
           <h2 className="Title">Nos réalisations</h2>
           <EventList />
         </section>
-        <section className="PeoplesContainer">
+        <section className="PeoplesContainer" id="notre-equipe">
           <h2 className="Title">Notre équipe</h2>
           <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
           <div className="ListContainer">
@@ -144,16 +144,36 @@ const Page = () => {
           <div>01 23 45 67 89</div>
           <div>contact@77events.com</div>
           <div>
-            <a href="#twitch">
+            <a
+              href="https://www.twitch.tv/"
+              target="_blank"
+              className="twitch-link"
+              rel="noreferrer"
+            >
               <Icon name="twitch" />
             </a>
-            <a href="#facebook">
+            <a
+              href="https://fr-fr.facebook.com"
+              target="_blank"
+              className="fb-link"
+              rel="noreferrer"
+            >
               <Icon name="facebook" />
             </a>
-            <a href="#twitter">
+            <a
+              href="https://twitter.com/?lang=fr"
+              target="_blank"
+              className="twitter-link"
+              rel="noreferrer"
+            >
               <Icon name="twitter" />
             </a>
-            <a href="#youtube">
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              className=" twitch-link"
+              rel="noreferrer"
+            >
               <Icon name="youtube" />
             </a>
           </div>
