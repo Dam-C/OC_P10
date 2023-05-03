@@ -12,7 +12,7 @@ import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
-const Page = () => {
+const Home = () => {
   // "last" remplacé par "data", "last" ne renvoyait à rien
   const { data } = useData();
   // l'utilisation de map+sort+shift en comparant les date pour obtenir la plus récente a permis de résoudre le problème
@@ -71,7 +71,11 @@ const Page = () => {
           <h2 className="Title">Nos réalisations</h2>
           <EventList />
         </section>
-        <section className="PeoplesContainer" id="notre-equipe">
+        <section
+          className="PeoplesContainer"
+          id="notre-equipe"
+          data-testid="team-testid"
+        >
           <h2 className="Title">Notre équipe</h2>
           <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
           <div className="ListContainer">
@@ -126,8 +130,8 @@ const Page = () => {
           </Modal>
         </div>
       </main>
-      <footer className="row">
-        <div className="col presta">
+      <footer className="row" data-testid="footer">
+        <div className="col presta" data-testid="last-event">
           <h3>Notre dernière prestation</h3>
           <EventCard
             imageSrc={latestEvent?.cover}
@@ -149,6 +153,7 @@ const Page = () => {
               target="_blank"
               className="twitch-link"
               rel="noreferrer"
+              data-testid="social-media-link"
             >
               <Icon name="twitch" />
             </a>
@@ -157,6 +162,7 @@ const Page = () => {
               target="_blank"
               className="fb-link"
               rel="noreferrer"
+              data-testid="social-media-link"
             >
               <Icon name="facebook" />
             </a>
@@ -165,6 +171,7 @@ const Page = () => {
               target="_blank"
               className="twitter-link"
               rel="noreferrer"
+              data-testid="social-media-link"
             >
               <Icon name="twitter" />
             </a>
@@ -173,6 +180,7 @@ const Page = () => {
               target="_blank"
               className=" twitch-link"
               rel="noreferrer"
+              data-testid="social-media-link"
             >
               <Icon name="youtube" />
             </a>
@@ -192,4 +200,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Home;
