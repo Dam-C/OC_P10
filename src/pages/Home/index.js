@@ -151,36 +151,32 @@ const Home = () => {
             <a
               href="https://www.twitch.tv/"
               target="_blank"
-              className="twitch-link"
+              className="twitch-link social-media-link"
               rel="noreferrer"
-              data-testid="social-media-link"
             >
               <Icon name="twitch" />
             </a>
             <a
               href="https://fr-fr.facebook.com"
               target="_blank"
-              className="fb-link"
+              className="fb-link social-media-link"
               rel="noreferrer"
-              data-testid="social-media-link"
             >
               <Icon name="facebook" />
             </a>
             <a
               href="https://twitter.com/?lang=fr"
               target="_blank"
-              className="twitter-link"
+              className="twitter-link social-media-link"
               rel="noreferrer"
-              data-testid="social-media-link"
             >
               <Icon name="twitter" />
             </a>
             <a
               href="https://www.youtube.com/"
               target="_blank"
-              className=" twitch-link"
+              className="yt-link social-media-link"
               rel="noreferrer"
-              data-testid="social-media-link"
             >
               <Icon name="youtube" />
             </a>
