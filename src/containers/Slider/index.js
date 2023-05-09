@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
 
@@ -8,8 +8,16 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
+    // le brief indique que les events ne s'affichent pas du plus ancien au plus récent, mais c'est pourtant le cas, rien à corriger ici
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
+
+  //fonction ajoutée pour modifier la case indiquant sur quelle image on se situe
+  const handleRadioChange = (e) => {
+    const newIndex = 0;
+    setIndex(newIndex);
+  };
+
   const nextCard = () => {
     setTimeout(() => {
       // ajout d'une condition de vérification de la valeur de "byDateDesc" pour savoir si elle est bien définie
@@ -27,9 +35,9 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        // Key passee sur un Reacct Fragment pour permettre de ne pas générer de warning
+        <React.Fragment key={idx}>
           <div
-            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -53,18 +61,19 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={event.id}
+                  key={radioIdx}
                   type="radio"
                   name="radio-button"
                   checked={
                     //idx remplacé par index
                     index === radioIdx
                   }
+                  onChange={handleRadioChange}
                 />
               ))}
             </div>
           </div>
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

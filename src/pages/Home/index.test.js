@@ -1,11 +1,4 @@
-import {
-  findAllByText,
-  fireEvent,
-  queryAllByTestId,
-  render,
-  screen,
-} from "@testing-library/react";
-import { window } from "@testing-library/user-event/dist/tab";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
 
 describe("When Form is created", () => {
@@ -34,34 +27,41 @@ describe("When Form is created", () => {
 });
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it("a list of events is displayed", async () => {
     // to implement
     render(<Home />);
+    await screen.findByTestId("card-testid");
   });
-  it("a list a people is displayed", () => {
-    // to implement
+  it("a list a people is displayed", async () => {
+    // to implement ok
     render(<Home />);
-    const team = screen.getByTestId("team-testid");
-    expect(team).toBeInTheDocument();
+
+    await screen.findByText("Samira");
+    await screen.findByText("Jean-baptiste");
+    await screen.findByText("Alice");
+    await screen.findByText("Luís");
+    await screen.findByText("Christine");
+    await screen.findByText("Isabelle");
+
+    expect(screen.getByTestId("team-testid")).toBeInTheDocument();
   });
   it("a footer is displayed", () => {
     // to implement ok
     render(<Home />);
-    const footer = screen.getByTestId("footer");
-    expect(footer).toBeInTheDocument();
+    expect(screen.getByTestId("footer")).toBeInTheDocument();
   });
   it("an event card, with the last event, is displayed", () => {
     // to implement ok
     render(<Home />);
-    const lastEvent = screen.getByTestId("last-event");
-    expect(lastEvent).toBeInTheDocument();
+    expect(screen.getByTestId("last-event")).toBeInTheDocument();
   });
 
-  it("should display a list of social", () => {
-    // to implement
+  it("should display a list of social", async () => {
+    // to implement ok
     render(<Home />);
-    const socials = screen.findAllByClassName("social-media-link");
-    console.log(socials);
-    //expect(socials).toHaveLength(4);
+    await screen.findByTestId("twitch-icon");
+    await screen.findByTestId("fb-icon");
+    await screen.findByTestId("twitter-icon");
+    await screen.findByTestId("yt-icon");
   });
 });

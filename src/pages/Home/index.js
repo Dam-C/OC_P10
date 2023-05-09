@@ -16,12 +16,13 @@ const Home = () => {
   // "last" remplacé par "data", "last" ne renvoyait à rien
   const { data } = useData();
   // l'utilisation de map+sort+shift en comparant les date pour obtenir la plus récente a permis de résoudre le problème
+
   const latestEvent = data?.events
     .map((item) => {
       return {
         title: item.title,
         cover: item.cover,
-        theDate: item.date,
+        date: new Date(item.date),
         type: item.type,
       };
     })
@@ -29,6 +30,7 @@ const Home = () => {
       (eventA, eventB) => new Date(eventB.theDate) - new Date(eventA.theDate)
     )
     .shift();
+
   return (
     <>
       <header>
@@ -134,15 +136,20 @@ const Home = () => {
         <div className="col presta" data-testid="last-event">
           <h3>Notre dernière prestation</h3>
           <EventCard
-            imageSrc={latestEvent?.cover}
-            title={latestEvent?.title}
-            date={latestEvent?.theDate}
-            small
+            // mise en place de ternaires de vérifiction des données passées pour éviter des warnings
+            imageSrc={latestEvent === undefined ? "" : latestEvent?.cover}
+            date={
+              latestEvent === undefined
+                ? new Date()
+                : new Date(latestEvent.date)
+            }
+            title={latestEvent === undefined ? "" : latestEvent?.title}
             // label n'avait pas de donnée renseignée à part "boom"
-            label={latestEvent?.type}
+            label={latestEvent === undefined ? "" : latestEvent?.type}
+            small
           />
         </div>
-        <div className="col contact">
+        <div className="col contact" data-testid="socials-and-contact">
           <h3>Contactez-nous</h3>
           <address>45 avenue de la République, 75000 Paris</address>
           <div>01 23 45 67 89</div>
@@ -153,6 +160,7 @@ const Home = () => {
               target="_blank"
               className="twitch-link social-media-link"
               rel="noreferrer"
+              data-testid="twitch-icon"
             >
               <Icon name="twitch" />
             </a>
@@ -161,6 +169,7 @@ const Home = () => {
               target="_blank"
               className="fb-link social-media-link"
               rel="noreferrer"
+              data-testid="fb-icon"
             >
               <Icon name="facebook" />
             </a>
@@ -169,14 +178,16 @@ const Home = () => {
               target="_blank"
               className="twitter-link social-media-link"
               rel="noreferrer"
+              data-testid="twitter-icon"
             >
-              <Icon name="twitter" />
+              <Icon name="twitter" data-testid="twitter-icon" />
             </a>
             <a
               href="https://www.youtube.com/"
               target="_blank"
               className="yt-link social-media-link"
               rel="noreferrer"
+              data-testid="yt-icon"
             >
               <Icon name="youtube" />
             </a>
